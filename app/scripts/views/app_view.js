@@ -14,6 +14,7 @@
             this.canvasView = new app.CanvasView();
             this.toolbarView = new app.ToolbarView();
             this.statusBarView = new app.StatusBarView();
+            this.settingsView = new app.SettingsView();
 
             this.render();
         },
@@ -23,6 +24,7 @@
             this.canvasView.render();
             this.toolbarView.render();
             this.statusBarView.render();
+            this.settingsView.render();
         }
 
     });

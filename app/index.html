@@ -46,7 +46,8 @@
                   </ul>
                   
                   <h2>Settings</h2>
-                  <p>Nothing selected</p>
+                  <div id="settings"></div>
+
                 </div>
 
                 <div class="col-lg-10 col-xs-9" id="canvas"></div>
@@ -60,6 +61,14 @@
 
 
         <!-- templates -->
+        <script id="tpl-settings" type="text/template">
+<ul>
+  <% _.each(attributes, function (value, key) { %>
+    <li><span><%= key %></span> <input name="<%= key %>" type="text" value="<%= value %>" /></li>
+  <% }); %>
+</ul>
+        </script>
+
         <script id="tpl-row-dialog" type="text/template">
 <div>
   <p>Create new row</p>
@@ -125,6 +134,7 @@
         <script src="scripts/views/canvas_view.js"></script>
         <script src="scripts/views/toolbar_view.js"></script>
         <script src="scripts/views/status_bar_view.js"></script>
+        <script src="scripts/views/settings_view.js"></script>
         <script src="scripts/views/app_view.js"></script>
 
         <script src="scripts/main.js"></script>

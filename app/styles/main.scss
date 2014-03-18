@@ -81,6 +81,44 @@ div#designer-app {
         }
     }
 
+    div#settings {
+        ul {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+
+            li {
+                padding: 0px;
+                position: relative;
+                height: 35px;
+
+                span {
+                    text-transform: uppercase;
+                    line-height: 30px;
+                    font-size: 12px;
+                }
+
+                input {
+                    position: absolute;
+                    right: 0px;
+                    top: 0px;
+                    font-family: 'Lato', sans-serif;
+                    background-color: $purple;
+                    color: #f1f1f1;
+                    border: 1px solid $purple;
+                    padding: 3px;
+                    width: 100px;
+                    transition: width 0.5s, background-color 0.5s;
+
+                    &:focus {
+                        width: 100%;
+                        background-color: $light-purple;
+                    }
+                }
+            }
+        }
+    }
+
     div#status-bar {
         @include box-sizing(border-box);
         text-align: right;
