@@ -63,9 +63,13 @@
             }
         },
 
+        // render the element to the DOM, it gets called by a parent container
+        // whenever the an element model is added to app.elements, the parent
+        // container can either be the canvas or another element.
         render: function () {
-            // render is called once when the canvas gets notified that a
-            // new element has been created, let's add the initial attributes
+            // the render process is easy, we already have the element in 'el',
+            // and the parent will include it in to the DOM, so all it's left
+            // is rendering the attributes of the object
             _.each(this.model.get('attributes').toJSON(), function (val, key) {
                 this.renderAttribute(key, val);
             }, this);
