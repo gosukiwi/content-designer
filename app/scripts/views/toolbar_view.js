@@ -15,6 +15,22 @@
             'click a': 'action'
         },
 
+        // constructor, listen to element change events
+        initialize: function () {
+            this.listenTo(app.elements, 'change:selected', this.selectionChanged);
+        },
+
+        // called when an element is selected or deselected, hide the element
+        // action buttons accordingly as they don't make sense if no element 
+        // is selected
+        selectionChanged: function (model, val) {
+            if(!val) {
+                this.$el.find('.element-action').hide();
+            } else {
+                this.$el.find('.element-action').show();
+            }
+        },
+
         // performs a toolbar action, there are two types so far, 'add' and 
         // 'edit'. 'add' actions insert elements to the canvas, while 'edit' 
         // actions update current elements.
@@ -33,11 +49,11 @@
 
         // perform an edit action, depending on the name parameter
         edit: function (name) {
+            // get current element
+            var current = app.elements.selected();
+
             // if we have to select the parent
             if(name === 'select-parent') {
-                // get current element
-                var current = app.elements.selected();
-
                 // if it's not null, get the parent, and if the parent
                 // is not null, select it. If it's null it's the canvas, so
                 // deselect all elements.
@@ -49,7 +65,24 @@
                         app.elements.deselect();
                     }
                 }
+            } else if(name === 'remove') {
+                if(current) {
+                    this.removeRecursive(current);
+                }
             }
+        },
+
+        // remove an element model and all it's children recursively
+        removeRecursive: function (model) {
+            app.elements.chain()
+                .filter(function (child) {
+                    return child.get('parent') === model;
+                })
+                .each(function (child) {
+                    this.removeRecursive(child);
+                }, this);
+
+            app.elements.remove(model);
         },
 
         // helper method, it displays a dialog to select the rows, and returns
@@ -136,7 +169,7 @@
             grid.attr('class', 'pure-g');
 
             this.showRowDialog()
-                .then(function (rows) {
+                .done(function (rows) {
                     _.each(rows, function(row) {
                         var div = self.add('div');
                         div.attr('class', 'pure-u-' + row);
@@ -145,6 +178,9 @@
 
                         grid.set('selected', true);
                     });
+                })
+                .fail(function () {
+                    app.elements.remove(grid);
                 });
             
             return grid;

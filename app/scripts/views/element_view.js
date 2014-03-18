@@ -20,6 +20,10 @@
             // when the selected value changes
             this.listenTo(this.model, 'change:selected', this.onSelected);
 
+            // when the model is destroyed, destroy view! this.remove is an
+            // inherited method
+            this.listenTo(this.model, 'remove', this.remove);
+
             switch(this.model.get('name')) {
                 case 'para':
                     this.setElement('<p />');
@@ -91,7 +95,7 @@
                     break;
                 case 'class':
                     // render class attribute, simply add a class to $el
-                    this.$el.addClass(val);
+                    this.$el.removeClass().addClass(val);
                     break;
                 default:
                     // TODO: What to do when there's an invalid key? For now 

@@ -38,9 +38,21 @@ div#designer-app {
             margin: 0px -15px;
 
             li {
+                position: relative;
+
+                &.action {
+                    display: none;
+                }
+
                 &.separator {
                     height: 1px;
                     background-color: $dark-purple;
+                }
+
+                span {
+                    position: absolute;
+                    right: 10px;
+                    top: 12px;
                 }
 
                 a {
