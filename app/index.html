@@ -1,0 +1,133 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>content creator</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css styles/vendor.css -->
+        <link rel="stylesheet" href="bower_components/pure/grids.css">
+        <link rel="stylesheet" href="bower_components/jquery-ui/themes/start/jquery-ui.css">
+        <link rel="stylesheet" href="bower_components/jquery-ui/themes/start/jquery.ui.theme.css">
+        <!-- bower:css -->
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+        <div class="container-fluid" id="designer-app">
+
+            <div class="row">
+                <div id="menu" class="col-lg-2 col-xs-3">
+                  <h2>Toolbar</h2>
+                  <ul id="toolbar">
+                    <li><a action="add" name="h1" href="#">Header 1</a></li>
+                    <li><a action="add" name="para" href="#">Paragraph</a></li>
+                    <li><a action="add" name="row" href="#">Row</a></li>
+                    <li class="separator"></li>
+                    <li><a action="edit" name="select-parent" href="#">Select Parent</a></li>
+                    <li><a action="edit" name="select-parent" href="#">Remove</a></li>
+                  </ul>
+                  
+                  <h2>Settings</h2>
+                  <p>Nothing selected</p>
+                </div>
+
+                <div class="col-lg-10 col-xs-9" id="canvas"></div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12" id="status-bar"></div>
+            </div>
+
+        </div>
+
+
+        <!-- templates -->
+        <script id="tpl-row-dialog" type="text/template">
+<div>
+  <p>Create new row</p>
+  <label for="rows">Rows</label>
+  <input type="text" value="1-2 1-2" name="rows" id="rows" class="text ui-widget-content ui-corner-all" />
+</div>
+        </script>
+
+
+        <script id="tpl-status-bar" type="text/template">
+<ul>
+  <li><span>status</span> <%= text %></li>
+  <li><span>elements</span> <%= elements %></li>
+  <li><span>current</span> <%= current ? current.get('name') : 'nothing' %></li>
+</ul>
+        </script>
+        <!-- endtemplates -->
+
+
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js"></script>
+        <!-- endbower -->
+
+        <script src="bower_components/underscore/underscore.js"></script>
+        <script src="bower_components/backbone/backbone.js"></script>
+
+        <script src="bower_components/jquery-ui/ui/jquery.ui.core.js"></script>
+        <script src="bower_components/jquery-ui/ui/jquery.ui.widget.js"></script>
+        <script src="bower_components/jquery-ui/ui/jquery.ui.mouse.js"></script>
+        <script src="bower_components/jquery-ui/ui/jquery.ui.position.js"></script>
+        <script src="bower_components/jquery-ui/ui/jquery.ui.draggable.js"></script>
+        <script src="bower_components/jquery-ui/ui/jquery.ui.resizable.js"></script>
+        <script src="bower_components/jquery-ui/ui/jquery.ui.button.js"></script>
+        <script src="bower_components/jquery-ui/ui/jquery.ui.dialog.js"></script>
+
+        <!-- endbuild -->
+
+        <!-- build:js scripts/plugins.js -->
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/dropdown.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tooltip.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/modal.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/button.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/carousel.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js"></script>
+        <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/init.js"></script>
+
+        <script src="scripts/models/attributes.js"></script>
+        <script src="scripts/models/element.js"></script>
+        <script src="scripts/models/element_list.js"></script>
+
+        <script src="scripts/views/element_view.js"></script>
+        <script src="scripts/views/canvas_view.js"></script>
+        <script src="scripts/views/toolbar_view.js"></script>
+        <script src="scripts/views/status_bar_view.js"></script>
+        <script src="scripts/views/app_view.js"></script>
+
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
