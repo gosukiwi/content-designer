@@ -42,7 +42,11 @@
                 case 'h1':
                 case 'para':
                     return {
-                        'text': '',
+                        'text': ''
+                    };
+                case 'img':
+                    return {
+                        'src': '',
                         'width': 'auto',
                         'height': 'auto'
                     };
