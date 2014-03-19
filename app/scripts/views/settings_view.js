@@ -47,6 +47,7 @@
             }
 
             this.$el.html(this.template({
+                name: this.current.get('name'),
                 attributes: this.current.get('attributes').toJSON()
             }));
 

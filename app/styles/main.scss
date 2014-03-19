@@ -23,13 +23,20 @@ div#designer-app {
     color: #f1f1f1;
 
     div#menu {
-        h1, h2 {
+        h1, h2, h3 {
             font-weight: 300;
             text-transform: uppercase;
 
             &:first-child {
                 margin-top: 10px;
             }
+        }
+
+        h3 {
+            margin: 0px;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            font-size: 20px;
         }
 
         ul#toolbar {

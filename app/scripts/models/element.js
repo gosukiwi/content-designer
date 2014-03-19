@@ -23,24 +23,31 @@
         // constructor, it creates a new attributes model stored in 'attributes'
         // and bind a change event to listen to changes to the attributes
         initialize: function () {
-            var attrs = new app.AttributesModel();
+            var elementAttributes = this.getAttributesFor(this.get('name'));
+            var attrs = new Backbone.Model(elementAttributes);
             this.set('attributes', attrs);
-            this.listenTo(attrs, 'change', this.attributeChanged);
 
-            // not all elements can modify the same attributes, set up the
-            // attributes model accordingly
-            this.setInitialAttributes(this.get('name'));
+            this.listenTo(attrs, 'change', this.attributeChanged);
         },
 
-        // set the initial attributes of the model according to the name, 
-        // helper method used by constructor
-        setInitialAttributes: function (name) {
+        // not all elements have the same attributes, for example, divs can
+        // only have classes, images can have width and height, paragraphs
+        // and headers can have text, etc.
+        getAttributesFor: function (name) {
             switch(name) {
                 case 'div':
-                    this.get('attributes').unset('text', 'silent');
-                    this.get('attributes').unset('width', 'silent');
-                    this.get('attributes').unset('height', 'silent');
-                    break;
+                    return {
+                        'class': ''
+                    };
+                case 'h1':
+                case 'para':
+                    return {
+                        'text': '',
+                        'width': 'auto',
+                        'height': 'auto'
+                    };
+                default:
+                    return {};
             }
         },
 
