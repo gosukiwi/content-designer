@@ -67,6 +67,12 @@
                 }
             } else if(name === 'remove') {
                 if(current) {
+                    if(current.get('parent')) {
+                        current.get('parent').set('selected', true);
+                    } else {
+                        app.elements.deselect();
+                    }
+
                     this.removeRecursive(current);
                 }
             }
