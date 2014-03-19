@@ -64,7 +64,11 @@
         <script id="tpl-settings" type="text/template">
 <ul>
   <% _.each(attributes, function (value, key) { %>
-    <li><span><%= key %></span> <input name="<%= key %>" type="text" value="<%= value %>" /></li>
+    <% if(key === 'text') { %>
+      <li><span><%= key %></span> <textarea name="<%= key %>"><%= value %></textarea></li>
+    <% } else { %>
+      <li><span><%= key %></span> <input name="<%= key %>" type="text" value="<%= value %>" /></li>
+    <% } %>
   <% }); %>
 </ul>
         </script>

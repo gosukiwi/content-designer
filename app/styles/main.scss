@@ -40,7 +40,7 @@ div#designer-app {
             li {
                 position: relative;
 
-                &.action {
+                &.element-action {
                     display: none;
                 }
 
@@ -110,7 +110,7 @@ div#designer-app {
                     font-size: 12px;
                 }
 
-                input {
+                input, textarea {
                     position: absolute;
                     right: 0px;
                     top: 0px;
@@ -120,11 +120,20 @@ div#designer-app {
                     border: 1px solid $purple;
                     padding: 3px;
                     width: 100px;
-                    transition: width 0.5s, background-color 0.5s;
+                    height: 25px;
+                    transition: width 0.5s, height 0.5s, background-color 0.5s;
+                    overflow: hidden;
 
                     &:focus {
                         width: 100%;
                         background-color: $light-purple;
+                    }
+                }
+
+                textarea {
+                    &:focus {
+                        height: 200px;
+                        z-index: 1000;
                     }
                 }
             }

@@ -26,6 +26,22 @@
             var attrs = new app.AttributesModel();
             this.set('attributes', attrs);
             this.listenTo(attrs, 'change', this.attributeChanged);
+
+            // not all elements can modify the same attributes, set up the
+            // attributes model accordingly
+            this.setInitialAttributes(this.get('name'));
+        },
+
+        // set the initial attributes of the model according to the name, 
+        // helper method used by constructor
+        setInitialAttributes: function (name) {
+            switch(name) {
+                case 'div':
+                    this.get('attributes').unset('text', 'silent');
+                    this.get('attributes').unset('width', 'silent');
+                    this.get('attributes').unset('height', 'silent');
+                    break;
+            }
         },
 
         // sets or gets an attribute value

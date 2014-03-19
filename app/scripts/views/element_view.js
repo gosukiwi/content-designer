@@ -24,6 +24,7 @@
             // inherited method
             this.listenTo(this.model, 'remove', this.remove);
 
+            // set the internal element to an according HTML element
             switch(this.model.get('name')) {
                 case 'para':
                     this.setElement('<p />');
@@ -100,6 +101,12 @@
                 case 'class':
                     // render class attribute, simply add a class to $el
                     this.$el.removeClass().addClass(val);
+                    break;
+                case 'width':
+                    this.$el.width(val);
+                    break;
+                case 'height':
+                    this.$el.height(val);
                     break;
                 default:
                     // TODO: What to do when there's an invalid key? For now 

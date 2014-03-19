@@ -17,7 +17,8 @@
 
         // bind to DOM events of the view
         events: {
-            'blur input': 'save'
+            'blur input': 'save',
+            'blur textarea': 'save'
         },
 
         // constructor, listen to the change:selected event as we'll have to
@@ -52,7 +53,8 @@
             return this;
         },
 
-        // called when an input loses focus, save changes to model
+        // called when an attribute input or textarea loses focus, save changes 
+        // to model
         save: function (e) {
             var input = $(e.target),
                 key = input.attr('name'),
