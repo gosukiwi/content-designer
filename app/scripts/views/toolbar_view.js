@@ -149,15 +149,6 @@
             // create the element model
             var elem = new app.ElementModel(attrs);
 
-            // customize the model for each type
-            if(name === 'para') {
-                elem.attr('text', 'Paragraph.');
-                elem.set('isContainer', false);
-            } else if(name === 'h1') {
-                elem.attr('text', 'Header 1');
-                elem.set('isContainer', false);
-            }
-
             // add the element to the list and let the views handle it!
             app.elements.add(elem);
 

@@ -27,6 +27,23 @@
             var attrs = new Backbone.Model(elementAttributes);
             this.set('attributes', attrs);
 
+            // some elements are not containers, let's see if we've got a 
+            // container or not, by default, all elements are containers
+            if($.inArray(this.get('name'), ['para', 'img', 'h1']) >= 0) {
+                console.log(this.get('name') + ' is not a container');
+                this.set('isContainer', false);
+            }
+
+            // if the element has text, set the initial value
+            switch(this.get('name')) {
+                case 'h1':
+                    this.attr('text', 'Header 1');
+                    break;
+                case 'para':
+                    this.attr('text', 'Lorem ipsum dolor sit amet.');
+                    break;
+            }
+
             this.listenTo(attrs, 'change', this.attributeChanged);
         },
 
@@ -38,6 +55,12 @@
                 case 'div':
                     return {
                         'class': ''
+                    };
+                case 'img':
+                    return {
+                        'src': 'http://placehold.it/250x250',
+                        'width': 'auto',
+                        'height': 'auto'
                     };
                 case 'h1':
                 case 'para':

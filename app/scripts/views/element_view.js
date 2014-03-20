@@ -26,6 +26,9 @@
 
             // set the internal element to an according HTML element
             switch(this.model.get('name')) {
+                case 'img':
+                    this.setElement('<img />');
+                    break;
                 case 'para':
                     this.setElement('<p />');
                     break;
@@ -107,6 +110,9 @@
                     break;
                 case 'height':
                     this.$el.height(val);
+                    break;
+                case 'src':
+                    this.$el.attr('src', val);
                     break;
                 default:
                     // TODO: What to do when there's an invalid key? For now 
