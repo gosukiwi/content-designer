@@ -23,6 +23,8 @@
         // constructor, it creates a new attributes model stored in 'attributes'
         // and bind a change event to listen to changes to the attributes
         initialize: function () {
+            // set the initial attributes of this model, using the helper 
+            // function getAttributesFor
             var elementAttributes = this.getAttributesFor(this.get('name'));
             var attrs = new Backbone.Model(elementAttributes);
             this.set('attributes', attrs);
@@ -34,7 +36,7 @@
                 this.set('isContainer', false);
             }
 
-            // if the element has text, set the initial value
+            // if the element has text, set the initial value accordingly
             switch(this.get('name')) {
                 case 'h1':
                     this.attr('text', 'Header 1');
@@ -44,6 +46,9 @@
                     break;
             }
 
+            // listen for changes in the attributes, and trigger a custom
+            // event, so the view doesn't have to care how we manage the
+            // attributes internally
             this.listenTo(attrs, 'change', this.attributeChanged);
         },
 
