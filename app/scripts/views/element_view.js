@@ -32,6 +32,10 @@
             // in the DOM
             this.listenTo(this.model, 'move-down', this.moveDown);
 
+            // when a new element gets added, and is a sibling of this element,
+            // and it must be added after it
+            this.listenTo(this.model, 'add-after', this.addAfter);
+
             // set the internal element to an according HTML element
             switch(this.model.get('name')) {
                 case 'img':
@@ -148,11 +152,26 @@
             }
         },
 
-        // when a new element is added to the elements this, and has this
-        // element as parent.
+        // This method assumes the current model is a container, it doesn't
+        // get called otherwise.
+        // Check the currently selected element, if it's a sibling of the new
+        // element, add if after the selection, if not, just append it to the
+        // container.
         addElement: function (model) {
+            var current = app.elements.selected();
+            if(current.get('parent') === model.get('parent')) {
+                current.trigger('add-after', model);
+            } else {
+                var view = new app.ElementView({ model: model });
+                this.$el.append( view.render().el );
+            }
+        },
+
+        // when a new element needs to be added after an element, this
+        // method gets called, it's a callback to the 'add-after' custom event
+        addAfter: function (model) {
             var view = new app.ElementView({ model: model });
-            this.$el.append( view.render().el );
+            view.render().$el.insertAfter(this.$el);
         }
 
     });

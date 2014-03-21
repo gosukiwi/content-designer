@@ -33,8 +33,13 @@
         // called when an element gets added to the collection and the element
         // has no parent
         addElement: function (model) {
-            var view = new app.ElementView({ model: model });
-            this.$el.append( view.render().el );
+            var current = app.elements.selected();
+            if(current && current.get('parent') === null) {
+                current.trigger('add-after', model);
+            } else {
+                var view = new app.ElementView({ model: model });
+                this.$el.append( view.render().el );
+            }
         }
 
     });
