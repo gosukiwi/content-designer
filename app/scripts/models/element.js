@@ -63,6 +63,7 @@
                 case 'img':
                     return {
                         'src': 'http://placehold.it/250x250',
+                        'align': 'auto',
                         'width': 'auto',
                         'height': 'auto'
                     };
@@ -70,12 +71,6 @@
                 case 'para':
                     return {
                         'text': ''
-                    };
-                case 'img':
-                    return {
-                        'src': '',
-                        'width': 'auto',
-                        'height': 'auto'
                     };
                 default:
                     return {};
