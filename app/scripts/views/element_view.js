@@ -142,7 +142,8 @@
                     this.$el.height(val);
                     break;
                 case 'src':
-                    this.$el.attr('src', val);
+                case 'align':
+                    this.$el.attr(key, val);
                     break;
                 default:
                     // TODO: What to do when there's an invalid key? For now 
