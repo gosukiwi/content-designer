@@ -52,29 +52,41 @@
             // get current element
             var current = app.elements.selected();
 
+            // if no element is selected, just return now as the edit function
+            // operates on HTML elements, not the canvas!
+            if(!current) {
+                return;
+            }
+
             // if we have to select the parent
             if(name === 'select-parent') {
-                // if it's not null, get the parent, and if the parent
-                // is not null, select it. If it's null it's the canvas, so
-                // deselect all elements.
-                if(current) {
-                    var container = current.get('parent');
-                    if(container) {
-                        container.set('selected', true);
-                    } else {
-                        app.elements.deselect();
-                    }
+                // get the parent, and if the parent is not null, select it. If 
+                // it's null it's the canvas, so deselect all elements.
+                var container = current.get('parent');
+                if(container) {
+                    container.set('selected', true);
+                } else {
+                    app.elements.deselect();
                 }
             } else if(name === 'remove') {
-                if(current) {
-                    if(current.get('parent')) {
-                        current.get('parent').set('selected', true);
-                    } else {
-                        app.elements.deselect();
-                    }
-
-                    this.removeRecursive(current);
+                // remove an element! before removing, set the parent as 
+                // selected if possible, if not, just deselect all elements
+                if(current.get('parent')) {
+                    current.get('parent').set('selected', true);
+                } else {
+                    app.elements.deselect();
                 }
+
+                // now recursively remove the element and all it's children
+                this.removeRecursive(current);
+            } else if(name === 'move-up') {
+                // let's trigger a move-up event on the model and let the 
+                // view handle it
+                current.trigger('move-up');
+            } else if(name === 'move-down') {
+                // same as move-up, let's trigger a move-up event on the model 
+                // and let the view handle it
+                current.trigger('move-down');
             }
         },
 
@@ -135,10 +147,20 @@
 
             // let's find out the container of this new element, if the 
             // currently selected element is a container, then that's it! but
-            // if it's not, just set it to null, so it gets added to the root
-            // element, the canvas.
-            var selected = app.elements.selected();
-            var container = (selected && selected.get('isContainer')) ? selected : null;
+            // if it's not, set the container to the parent of that element.
+            // If there's no currently selected element, just set the container
+            // to null, so it gets added to the root element, the canvas.
+            var selected = app.elements.selected(),
+                container;
+            if(selected) {
+                if(selected.get('isContainer')) {
+                    container = selected;
+                } else {
+                    container = selected.get('parent');
+                }
+            } else {
+                container = null;
+            }
 
             // the base attributes for a new element
             var attrs = {

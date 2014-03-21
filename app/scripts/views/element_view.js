@@ -24,6 +24,14 @@
             // inherited method
             this.listenTo(this.model, 'remove', this.remove);
 
+            // triggered by the toolbar, when an element should be moved up in
+            // the DOM
+            this.listenTo(this.model, 'move-up', this.moveUp);
+
+            // triggered by the toolbar, when an element should be moved down 
+            // in the DOM
+            this.listenTo(this.model, 'move-down', this.moveDown);
+
             // set the internal element to an according HTML element
             switch(this.model.get('name')) {
                 case 'img':
@@ -46,6 +54,24 @@
         // bind to DOM events
         events: {
             'click': 'select'
+        },
+
+        // move an element up in the DOM, relative to it's parent
+        moveUp: function () {
+            var $prev = this.$el.prev();
+
+            if($prev.length) {
+                $prev.insertAfter(this.$el);
+            }
+        },
+
+        // move an element down in the DOM, relative to it's parent
+        moveDown: function () {
+            var $next = this.$el.next();
+
+            if($next.length) {
+                $next.insertBefore(this.$el);
+            }
         },
 
         // called when the element is clicked, it marks this element as 
