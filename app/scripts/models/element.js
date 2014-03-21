@@ -32,7 +32,6 @@
             // some elements are not containers, let's see if we've got a 
             // container or not, by default, all elements are containers
             if($.inArray(this.get('name'), ['para', 'img', 'h1']) >= 0) {
-                console.log(this.get('name') + ' is not a container');
                 this.set('isContainer', false);
             }
 
