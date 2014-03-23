@@ -134,6 +134,38 @@
             return def.promise();
         },
 
+        // shows a dialog to select the level of the header element, similar
+        // to showRowDialog
+        showHeaderDialog: function () {
+            var def = $.Deferred();
+            $( $('#tpl-header-dialog').html() ).dialog({
+                buttons: {
+                    'OK': function () {
+                        // get the integer value and make it valid!
+                        var val = parseInt($(this).find('input').val().trim(), 10);
+                        if(isNaN(val)) {
+                            val = 1;
+                        } else if(val > 5) {
+                            val = 5;
+                        } else if(val < 1) {
+                            val = 1;
+                        }
+
+                        // resolve the promise
+                        def.resolve(val);
+
+                        $(this).dialog('close');
+                    },
+                    'Cancel': function () {
+                        def.reject();
+                        $(this).dialog('close');
+                    }
+                }
+            });
+            return def.promise();
+        },
+
+
         // adds a new element model of type 'name' to the collection, and 
         // returns it, it can add nested elements.
         // as this method returns the model it can be used recursively to
@@ -143,6 +175,8 @@
             // nested elements require some work, add them separately
             if(name === 'row') {
                 return this.addRow();
+            } else if(name === 'header') {
+                return this.addHeader();
             }
 
             // let's find out the container of this new element, if the 
@@ -177,6 +211,15 @@
             // return the element so this method can be used to create 
             // nested elements as 'addRow' does.
             return elem;
+        },
+
+        // adds a header element, either from h1 to h5
+        addHeader: function () {
+            var self = this;
+            this.showHeaderDialog().
+                done(function (level) {
+                    self.add('h' + level);
+                });
         },
 
         // private helper method for adding a row element to the canvas, used 

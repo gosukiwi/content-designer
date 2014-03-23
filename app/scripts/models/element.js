@@ -31,7 +31,7 @@
 
             // some elements are not containers, let's see if we've got a 
             // container or not, by default, all elements are containers
-            if($.inArray(this.get('name'), ['para', 'img', 'h1']) >= 0) {
+            if($.inArray(this.get('name'), ['para', 'img', 'h1', 'h2', 'h3', 'h4', 'h5']) >= 0) {
                 this.set('isContainer', false);
             }
 
@@ -39,6 +39,18 @@
             switch(this.get('name')) {
                 case 'h1':
                     this.attr('text', 'Header 1');
+                    break;
+                case 'h2':
+                    this.attr('text', 'Header 2');
+                    break;
+                case 'h3':
+                    this.attr('text', 'Header 3');
+                    break;
+                case 'h4':
+                    this.attr('text', 'Header 4');
+                    break;
+                case 'h5':
+                    this.attr('text', 'Header 5');
                     break;
                 case 'para':
                     this.attr('text', 'Lorem ipsum dolor sit amet.');

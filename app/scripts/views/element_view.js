@@ -47,6 +47,20 @@
                 case 'h1':
                     this.setElement('<h1 />');
                     break;
+                case 'h2':
+                    this.setElement('<h2 />');
+                    break;
+                case 'h3':
+                    this.setElement('<h3 />');
+                    break;
+                case 'h4':
+                    this.setElement('<h4 />');
+                    break;
+                case 'h5':
+                    this.setElement('<h5 />');
+                    break;
+
+
             }
 
             // set this as the currently selected element, as there can be only 

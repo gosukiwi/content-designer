@@ -37,7 +37,7 @@
                 <div id="menu" class="col-lg-2 col-xs-3">
                   <h2>Toolbar</h2>
                   <ul id="toolbar">
-                    <li><a action="add" name="h1" href="#">Header 1</a></li>
+                    <li><a action="add" name="header" href="#">Header</a></li>
                     <li><a action="add" name="para" href="#">Paragraph</a></li>
                     <li><a action="add" name="img" href="#">Image</a></li>
                     <li><a action="add" name="row" href="#">Row</a></li>
@@ -76,6 +76,15 @@
   <% }); %>
 </ul>
         </script>
+
+        <script id="tpl-header-dialog" type="text/template">
+<div>
+  <p>Create new header</p>
+  <label for="rows">Level</label>
+  <input type="number" value="1" name="level" id="level" class="text ui-widget-content ui-corner-all" />
+</div>
+        </script>
+
 
         <script id="tpl-row-dialog" type="text/template">
 <div>
